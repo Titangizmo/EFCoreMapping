@@ -18,9 +18,11 @@ namespace UI
                 Console.WriteLine("----");
                 Console.WriteLine("Menu");
                 Console.WriteLine("----");
-                Console.WriteLine(" 1. Owned Types / Complex Types");
+                Console.WriteLine("1. Owned Types / Complex Types");
+                Console.WriteLine("2. Inheritance: TPH");
 
 
+                Console.WriteLine("");
                 Console.Write("Keuze ('X' om te stoppen): ");
                 keuze = Console.ReadLine();
                 Console.WriteLine("----------------------------------------------------------\n");
@@ -95,6 +97,26 @@ namespace UI
             context.Add(johan);
             context.SaveChanges();
         }
+        // 2. Inheritance: TPH
+        static void Item02()
+        {
+            using var context = new EFCoreMappingContext();
+            context.TPHCursussen.Add(new TPHKlassikaleCursus
+            {
+                Naam = "Frans in 24 uur",
+                Van = DateTime.Today,
+                Tot = DateTime.Today
+            });
+            context.TPHCursussen.Add(new TPHZelfstudieCursus
+            {
+                Naam = "Engels in 24 uur",
+                AantalDagen = 1
+            });
+            context.SaveChanges();
+        }
+
+
+
     }
 }
 

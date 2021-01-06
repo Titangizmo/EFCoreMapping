@@ -20,6 +20,11 @@ namespace Model.Repositories
         public DbSet<Docent> Docenten { get; set; }
         // Inheritance: TPH
         public DbSet<TPHCursus> TPHCursussen { get; set; }
+        public DbSet<TPHKlassikaleCursus> TPHKlassikaleCursussen { get; set; }
+        public DbSet<TPHZelfstudieCursus> TPHZelfstudieCursussen { get; set; }
+        // Associaties
+        public DbSet<ASSDocent> ASSDocenten { get; set; }
+        public DbSet<ASSCampus> ASSCampussen { get; set; }
         // ------------
         // Constructors
         // ------------
@@ -42,7 +47,7 @@ namespace Model.Repositories
             {
                 // Zoek de naam in de connectionStrings section - appsettings.json
                 configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName) 
+                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
                .AddJsonFile("appsettings.json", false)
                 .Build();
                 var connectionString = configuration.GetConnectionString("efcoremapping");
@@ -63,7 +68,31 @@ namespace Model.Repositories
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            // -----------
+            // Associaties
+            // -----------
+            modelBuilder.Entity<ASSCampus>().OwnsOne(s => s.Adres);
+            modelBuilder.Entity<ASSCampus>().OwnsOne(s => s.Adres).Property(b =>
+            b.Straat).HasColumnName("Straat");
+            modelBuilder.Entity<ASSCampus>().OwnsOne(s => s.Adres).Property(b =>
+            b.Huisnummer).HasColumnName("HuisNr");
+            modelBuilder.Entity<ASSCampus>().OwnsOne(s => s.Adres).Property(b =>
+            b.Postcode).HasColumnName("PostCd");
+            modelBuilder.Entity<ASSCampus>().OwnsOne(s => s.Adres).Property(b =>
+            b.Gemeente).HasColumnName("Gemeente");
+            modelBuilder.Entity<ASSDocent>().OwnsOne(s => s.Adres);
+            modelBuilder.Entity<ASSDocent>().OwnsOne(s => s.Adres).Property(b =>
+            b.Gemeente).HasColumnName("Gemeente");
+            modelBuilder.Entity<ASSDocent>().OwnsOne(s => s.Adres).Property(b =>
+            b.Huisnummer).HasColumnName("HuisNr");
+            modelBuilder.Entity<ASSDocent>().OwnsOne(s => s.Adres).Property(b =>
+            b.Postcode).HasColumnName("PostCd");
+            modelBuilder.Entity<ASSDocent>().OwnsOne(s => s.Adres).Property(b =>
+            b.Straat).HasColumnName("Straat");
+            //modelBuilder.Entity<ASSDocent>()
+            // .HasOne(b => b.ASSCampus)
+            // .WithMany(c => c.ASSDocenten)
+            // .HasForeignKey(b => b.CampusId);
             // -----
             // Adres
             // -----
@@ -128,6 +157,16 @@ namespace Model.Repositories
             .HasColumnName("CampusNaam")
             .IsRequired();
             modelBuilder.Entity<Campus>().Ignore(c => c.Commentaar);
+
+
+            // ----------------
+            // Inheritance: TPH
+            // ----------------
+            modelBuilder.Entity<TPHCursus>()
+            .ToTable("TPHCursussen") // (1)
+            .HasDiscriminator<string>("CursusType") // (2)
+            .HasValue<TPHKlassikaleCursus>("K") // (3)
+            .HasValue<TPHZelfstudieCursus>("Z"); //(4)
         }
     }
 }
