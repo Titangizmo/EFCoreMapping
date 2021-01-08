@@ -33,5 +33,7 @@ namespace Model.Entities
         // ---------------------
         [ForeignKey(nameof(CampusId))]
         public virtual ASSCampus ASSCampus { get; set; } // (2)
+        public virtual ICollection<ASSDocentActiviteit> DocentenActiviteiten { get; set; } = new
+List<ASSDocentActiviteit>();
     }
 }

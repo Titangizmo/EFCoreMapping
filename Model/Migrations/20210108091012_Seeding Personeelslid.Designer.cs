@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Model.Repositories;
 
 namespace Model.Migrations
 {
     [DbContext(typeof(EFCoreMappingContext))]
-    partial class EFCoreMappingContextModelSnapshot : ModelSnapshot
+    [Migration("20210108091012_Seeding Personeelslid")]
+    partial class SeedingPersoneelslid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1683,133 +1685,6 @@ namespace Model.Migrations
                     b.HasIndex("ManagerId");
 
                     b.ToTable("Personeelsleden");
-
-                    b.HasData(
-                        new
-                        {
-                            PersoneelsId = 1,
-                            Voornaam = "Diane"
-                        },
-                        new
-                        {
-                            PersoneelsId = 2,
-                            ManagerId = 1,
-                            Voornaam = "Mary"
-                        },
-                        new
-                        {
-                            PersoneelsId = 3,
-                            ManagerId = 1,
-                            Voornaam = "Jeff"
-                        },
-                        new
-                        {
-                            PersoneelsId = 4,
-                            ManagerId = 2,
-                            Voornaam = "William"
-                        },
-                        new
-                        {
-                            PersoneelsId = 5,
-                            ManagerId = 2,
-                            Voornaam = "Gerard"
-                        },
-                        new
-                        {
-                            PersoneelsId = 6,
-                            ManagerId = 2,
-                            Voornaam = "Anthony"
-                        },
-                        new
-                        {
-                            PersoneelsId = 7,
-                            ManagerId = 6,
-                            Voornaam = "Leslie"
-                        },
-                        new
-                        {
-                            PersoneelsId = 8,
-                            ManagerId = 6,
-                            Voornaam = "July"
-                        },
-                        new
-                        {
-                            PersoneelsId = 9,
-                            ManagerId = 6,
-                            Voornaam = "Steve"
-                        },
-                        new
-                        {
-                            PersoneelsId = 10,
-                            ManagerId = 6,
-                            Voornaam = "Foon Yue"
-                        },
-                        new
-                        {
-                            PersoneelsId = 11,
-                            ManagerId = 6,
-                            Voornaam = "George"
-                        },
-                        new
-                        {
-                            PersoneelsId = 12,
-                            ManagerId = 5,
-                            Voornaam = "Loui"
-                        },
-                        new
-                        {
-                            PersoneelsId = 13,
-                            ManagerId = 5,
-                            Voornaam = "Pamela"
-                        },
-                        new
-                        {
-                            PersoneelsId = 14,
-                            ManagerId = 5,
-                            Voornaam = "Larry"
-                        },
-                        new
-                        {
-                            PersoneelsId = 15,
-                            ManagerId = 5,
-                            Voornaam = "Barry"
-                        },
-                        new
-                        {
-                            PersoneelsId = 16,
-                            ManagerId = 4,
-                            Voornaam = "Andy"
-                        },
-                        new
-                        {
-                            PersoneelsId = 17,
-                            ManagerId = 4,
-                            Voornaam = "Peter"
-                        },
-                        new
-                        {
-                            PersoneelsId = 18,
-                            ManagerId = 4,
-                            Voornaam = "Tom"
-                        },
-                        new
-                        {
-                            PersoneelsId = 19,
-                            ManagerId = 2,
-                            Voornaam = "Mami"
-                        },
-                        new
-                        {
-                            PersoneelsId = 20,
-                            ManagerId = 19,
-                            Voornaam = "Yoshimi"
-                        },
-                        new
-                        {
-                            PersoneelsId = 21,
-                            ManagerId = 5,
-                            Voornaam = "Martin"
-                        });
                 });
 
             modelBuilder.Entity("Model.Entities.TPHCursus", b =>
